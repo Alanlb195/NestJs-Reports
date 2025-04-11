@@ -2,7 +2,7 @@ import fs from 'fs';
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { PrinterService } from 'src/printer/printer.service';
-import { footerSection, getHelloWorldReport, headerSection } from 'src/reports';
+import { footerSection, getCommunityReport, headerSection } from 'src/reports';
 import { getHtmlContent } from 'helpers/html-to-pdfmake';
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
 
@@ -44,6 +44,41 @@ export class ExtraReportsService extends PrismaClient implements OnModuleInit {
 
         return doc;
 
+    }
+
+    getComunityRp() {
+
+        const docDefinition = getCommunityReport();
+
+        const doc = this.printerService.createPdf(docDefinition);
+
+        return doc;
+    }
+
+
+    getCustomSize() {
+        const doc = this.printerService.createPdf({
+            // pageSize: 'TABLOID',
+            pageSize: {
+                width: 150,
+                height: 300,
+            },
+            content: [
+                {
+                    qr: 'https://devtalles.com',
+                    fit: 100,
+                    alignment: 'center',
+                },
+                {
+                    text: 'Reporte con tamaño',
+                    fontSize: 10,
+                    alignment: 'center',
+                    margin: [0, 20],
+                },
+            ],
+        });
+
+        return doc;
     }
 
 }

@@ -13,9 +13,30 @@ export class ExtraReportsController {
   async getHtmlReport(@Res() res: Response) {
     const pdfDoc = this.extraReportsService.getHtmlReport();
     res.setHeader('Content-Type', 'application/pdf');
+    pdfDoc.info.Title = 'HTML-Report'
     pdfDoc.pipe(res);
     pdfDoc.end();
   }
 
+
+  @Get('comunity-report')
+  async getComunityReport(@Res() res: Response) {
+    const pdfDoc = this.extraReportsService.getComunityRp();
+
+    res.setHeader('Content-Type', 'application/pdf');
+    pdfDoc.info.Title = 'Billing-Report'
+    pdfDoc.pipe(res);
+    pdfDoc.end();
+  }
+
+  @Get('custom-size')
+  async getCustomSize(@Res() response: Response) {
+    const pdfDoc = this.extraReportsService.getCustomSize();
+
+    response.setHeader('Content-Type', 'application/pdf');
+    pdfDoc.info.Title = 'Custom-Size';
+    pdfDoc.pipe(response);
+    pdfDoc.end();
+  }
 
 }

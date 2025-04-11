@@ -1,3 +1,8 @@
+export * from './basic-chart-svg.report';
+export * from './charts/bars.chart';
+export * from './charts/donut.chart';
+export * from './charts/line.chart';
+export * from './comunity-report';
 export * from './countries.report';
 export * from './employment-letter-by-id.report';
 export * from './employment-letter.report';
@@ -5,3 +10,4 @@ export * from './hello-world.report';
 export * from './order-by-id.report';
 export * from './sections/footer.section';
 export * from './sections/header.section';
+export * from './statistics.report';
