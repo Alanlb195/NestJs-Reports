@@ -4,10 +4,18 @@
 
 # Reports for NestJS
 
-A NestJS-based application for generating and managing reports. This project uses Docker and Prisma for streamlined development and database management.
+A NestJS-based application for generating and managing reports in PDF format.
+This project uses Docker, PostgreSQL, Prisma, and pdfmake for a full-featured, modern development environment.
 
 
-### Follow the steps below to run the application in development mode:
+### Features
+- 🐘 PostgreSQL database via Docker
+- 📄 PDF report generation with pdfmake
+- 🧱 Prisma as ORM
+- ⚙️ Ready-to-use SQL script to insert mock employee data
+- 💡 Recommended usage with Insomnia for better PDF rendering in API responses
+
+### Getting Started
 
 1. Clone the Repository
 
@@ -17,7 +25,7 @@ npm install
 ```
 
 
-3. Set Up the Environment Variables, copy the example environment file and rename it:
+3. Set up environment variables
 ```
 cp .env.template .env
 ```
@@ -28,14 +36,18 @@ cp .env.template .env
 docker compose up -d
 ```
 
-5. Start Docker Services
+5. Generate the prisma client
+```
+npx prisma generate
+```
 
+
+6. Start the NestJS app in development mode
 ```
 npm run start:dev
 ```
 
+### Optional: Insert Sample Employee Data
 
-6. Generate the prisma client
-```
-npx prisma generate
-```
+If you want to test custom report generation with mock employees, you can run the raw SQL script located in ```queries/01-employees.sql```
+
