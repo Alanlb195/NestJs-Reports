@@ -40,6 +40,10 @@ docker compose up -d
 ```
 npx prisma generate
 ```
+Other commands:
+```
+npx prisma db pull
+```
 
 
 6. Start the NestJS app in development mode

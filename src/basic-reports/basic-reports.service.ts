@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { PrinterService } from 'src/printer/printer.service';
-import { getEmploymentLetter, getEmploymentLetterById, getHelloWorldReport } from 'src/reports';
+import { getCountryReport, getEmploymentLetter, getEmploymentLetterById, getHelloWorldReport } from 'src/reports';
 
 @Injectable()
 export class BasicReportsService extends PrismaClient implements OnModuleInit {
@@ -37,10 +37,9 @@ export class BasicReportsService extends PrismaClient implements OnModuleInit {
 
         return doc;
 
-    }   
+    }
 
     async employmentLetterById(employeeId: number) {
-
 
         const employee = await this.employees.findUnique({
             where: {
@@ -66,6 +65,22 @@ export class BasicReportsService extends PrismaClient implements OnModuleInit {
         const doc = this.printerService.createPdf(report);
 
         return doc;
+    }
+
+
+    async getCountryReport() {
+
+        const countries = await this.countries.findMany({
+            where: {
+                local_name: {
+                    not: null
+                }
+            }
+        })
+        const report = getCountryReport( { countries: countries } );
+
+        return this.printerService.createPdf(report);
+
     }
 
 
